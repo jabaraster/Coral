@@ -7,8 +7,6 @@ import jabara.coral.entity.EItem;
 import jabara.coral.service.IItemSetService;
 import jabara.general.NotFound;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.SortedSet;
 
 import javax.inject.Inject;
@@ -16,6 +14,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  * @author jabaraster
@@ -41,12 +41,12 @@ public class ItemSetResource {
     @Path("items")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    public List<EItem> getItems() throws NotFound {
+    public Response getItems() throws NotFound {
         try {
             final SortedSet<EItem> list = this.itemSetService.findByProjectId(this.projectId).getItemsSnapshotWithIndexSorted();
-            return new ArrayList<>(list);
+            return Response.ok(list).build();
         } catch (final NotFound e) {
-            throw NotFound.GLOBAL;
+            return Response.status(Status.NOT_FOUND).build();
         }
     }
 

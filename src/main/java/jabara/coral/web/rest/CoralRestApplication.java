@@ -3,7 +3,6 @@
  */
 package jabara.coral.web.rest;
 
-import jabara.coral.model.DI;
 import jabara.jax_rs.JsonMessageBodyReaderWriter;
 
 import java.util.Arrays;
@@ -22,9 +21,9 @@ public class CoralRestApplication extends Application {
      */
     @Override
     public Set<Class<?>> getClasses() {
-        return new HashSet<Class<?>>(Arrays.asList( //
-                JsonMessageBodyReaderWriter.class //
-                ));
+        return new HashSet<>(Arrays.asList(new Class<?>[] { //
+                JsonMessageBodyReaderWriter.class // JSONをきれいに返すにはこのクラスが必要.
+                }));
     }
 
     /**
@@ -32,8 +31,9 @@ public class CoralRestApplication extends Application {
      */
     @Override
     public Set<Object> getSingletons() {
-        return new HashSet<Object>(Arrays.asList( //
-                DI.get(ProjectResource.class) //
-                ));
+        return new HashSet<>(Arrays.asList(new Object[] { //
+                // new TimeResource() //
+                new ProjectResource() //
+                }));
     }
 }
