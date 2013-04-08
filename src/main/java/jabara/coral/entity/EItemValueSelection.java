@@ -8,6 +8,7 @@ import jabara.jpa.entity.EntityBase;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,6 +33,7 @@ public class EItemValueSelection extends EntityBase<EItemValueSelection> impleme
      * 
      */
     @Column(nullable = false, length = MAX_LENGTH_VALUE * 3)
+    @NotNull
     @Size(min = 1, max = MAX_LENGTH_VALUE)
     protected String          value;
 

@@ -10,6 +10,7 @@ import jabara.coral.entity.EItemValueSelection;
 import jabara.coral.entity.EProject;
 import jabara.coral.service.IItemSetService;
 import jabara.coral.service.IProjectService;
+import jabara.general.ArgUtil;
 import jabara.general.NotFound;
 import jabara.jpa_guice.ThreadLocalEntityManagerFactoryHandler;
 
@@ -42,6 +43,9 @@ public class ItemSetServiceImplTest {
     @SuppressWarnings("nls")
     @Test
     public void _findByProjectId() throws NotFound {
+        final EntityManager i = ArgUtil.checkNull(this.em, "em");
+        jabara.Debug.write(i);
+
         final EProject project = new EProject("Sampe Project"); //$NON-NLS-1$
         this.projectService.insert(project);
 

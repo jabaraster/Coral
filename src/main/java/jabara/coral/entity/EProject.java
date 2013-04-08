@@ -7,6 +7,8 @@ import jabara.jpa.entity.EntityBase;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,8 +27,15 @@ public class EProject extends EntityBase<EProject> {
      * 
      */
     @Column(nullable = false, length = MAX_LENGTH_NAME * 3, unique = true)
+    @NotNull
     @Size(min = 1, max = MAX_LENGTH_NAME)
     protected String          name;
+
+    /**
+     * 
+     */
+    @JoinColumn(nullable = false)
+    protected EItemSet        items;
 
     /**
      * 
@@ -40,6 +49,13 @@ public class EProject extends EntityBase<EProject> {
      */
     public EProject(final String pName) {
         this.name = pName;
+    }
+
+    /**
+     * @return itemsを返す.
+     */
+    public EItemSet getItems() {
+        return this.items;
     }
 
     /**
